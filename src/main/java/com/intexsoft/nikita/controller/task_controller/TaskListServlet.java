@@ -1,0 +1,28 @@
+package com.intexsoft.nikita.controller.task_controller;
+
+import com.intexsoft.nikita.service.TaskService;
+import com.intexsoft.nikita.service.TaskServiceImpl;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class TaskListServlet extends HttpServlet {
+
+    final TaskService taskService = new TaskServiceImpl();
+    private static final Logger logger =  LoggerFactory.getLogger(TaskListServlet.class);
+
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        logger.info("############### Just a log message. Without anything ###############");
+        request.setAttribute("taskList", taskService.getTasks());
+        request.getRequestDispatcher("WEB-INF/views/taskList.jsp").
+                forward(request, response);
+    }
+}
