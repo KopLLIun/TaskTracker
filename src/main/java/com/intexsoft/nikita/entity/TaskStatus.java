@@ -1,27 +1,28 @@
 package com.intexsoft.nikita.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
+@Entity
+@Table(name = "task_status")
 public class TaskStatus {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String status;
 
-    public TaskStatus() {
-    }
+    @OneToMany(mappedBy = "status", cascade = CascadeType.ALL)
+    private Set<TaskJournal> journals;
 
-    public Long getId() {
-        return id;
-    }
+    public TaskStatus() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public String getCondition() {
-        return status;
-    }
-
-    public void setCondition(String condition) {
-        this.status = condition;
-    }
 }

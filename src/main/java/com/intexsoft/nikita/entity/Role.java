@@ -1,17 +1,34 @@
 package com.intexsoft.nikita.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
-@Data
-@Table
+@AllArgsConstructor
+@Entity
+@Table(name = "role")
 public class Role {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "role_name")
     private String roleName;
 
-    public Role() {
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
+    public Role() {}
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 }

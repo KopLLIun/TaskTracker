@@ -1,27 +1,34 @@
 package com.intexsoft.nikita.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
+import javax.persistence.*;
+
+@AllArgsConstructor
+@Entity
+@Table(name = "task_type_custom_fields_values")
 public class TaskTypeCustomFieldsValues {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "custom_value")
     private String customValue;
 
-    public Long getId() {
-        return id;
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @JoinColumn(name = "type_custom_fields_id")
+    private TaskTypeCustomFields typeCustomFields;
+
+    public TaskTypeCustomFieldsValues() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCustomValue() {
-        return customValue;
-    }
-
-    public void setCustomValue(String customValue) {
-        this.customValue = customValue;
+    @Override
+    public String toString() {
+        return "TaskTypeCustomFieldsValues{" +
+                "id=" + id +
+                ", customValue='" + customValue + '\'' +
+                '}';
     }
 }

@@ -23,8 +23,8 @@
                 <td><input type="text" name="description" value="${task.description}" /></td>
             </tr>
             <tr>
-                <td>Executor Id</td>
-                <td><input type="text" name="executor_id" value="${task.executorId}" /></td>
+<%--                <td>Executor Id</td>--%>
+<%--                <td><input type="text" name="executor_id" value="${task.executorId}" /></td>--%>
             </tr>
             <tr>
                 <td colspan = "2">

@@ -1,45 +1,41 @@
 package com.intexsoft.nikita.entity;
 
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
-@Data
-@Table
+@AllArgsConstructor
+@Entity
+@Table(name = "comment")
 public class Comment {
 
+    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String text;
 
     private Date date;
 
-    public Comment() {
-    }
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "task_id")
+    private Task task;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Comment() {}
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", date=" + date + '\n' +
+//                ", user_comment=" + user +
+                '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.intexsoft.nikita.controller.task_controller;
 
-import com.intexsoft.nikita.service.TaskService;
+import com.intexsoft.nikita.entity.Task;
+import com.intexsoft.nikita.service.ITaskService;
 import com.intexsoft.nikita.service.TaskServiceImpl;
 
 import javax.servlet.ServletException;
@@ -11,13 +12,14 @@ import java.io.IOException;
 
 public class DeleteTaskServlet extends HttpServlet {
 
-    final TaskService taskService = new TaskServiceImpl();
+    final ITaskService taskService = new TaskServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        taskService.deleteTask(id);
+        Task task = taskService.getTaskById(id);
+        taskService.deleteTask(task);
         response.sendRedirect(request.getContextPath() + "/taskList");
     }
 

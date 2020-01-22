@@ -1,54 +1,42 @@
 package com.intexsoft.nikita.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
 
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Data
-@Table
+@AllArgsConstructor
+@Entity
+@Table(name = "request")
 public class Request {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NonNull
     private Long id;
 
     private String description;
 
+    @Column(name = "client_name")
     private String clientName;
 
+    @Column(name = "mobile_phone")
     private String mobilePhone;
 
-    public Request() {
-    }
+    @OneToOne(mappedBy = "request", fetch = FetchType.EAGER)
+    private Task task;
 
-    public Long getId() {
-        return id;
-    }
+    public Request() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public String getMobilePhone() {
-        return mobilePhone;
-    }
-
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
+    @Override
+    public String toString() {
+        return "Request{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", clientName='" + clientName + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                '}';
     }
 }

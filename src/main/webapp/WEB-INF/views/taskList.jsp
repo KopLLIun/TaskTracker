@@ -20,7 +20,7 @@
     <tr>
         <th>Id</th>
         <th>Description</th>
-        <th>Executor Id</th>
+<%--        <th>Executor Id</th>--%>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -28,7 +28,7 @@
         <tr>
             <td>${task.id}</td>
             <td>${task.description}</td>
-            <td>${task.executorId}</td>
+<%--            <td>${task.executorId.id}</td>--%>
             <td>
                 <a href="editTask?id=${task.id}">Edit</a>
             </td>

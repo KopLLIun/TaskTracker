@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/task_tracker</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">rVRGAhoi913!</property>
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="hibernate.connection.pool_size">2</property>
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">true</property>
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.connection.CharSet">utf8</property>
+        <property name="hibernate.connection.characterEncoding">utf8</property>
+        <property name="hibernate.connection.useUnicode">true</property>
+
+        <mapping class="com.intexsoft.nikita.entity.Comment" />
+        <mapping class="com.intexsoft.nikita.entity.Task" />
+        <mapping class="com.intexsoft.nikita.entity.Request" />
+        <mapping class="com.intexsoft.nikita.entity.Role" />
+        <mapping class="com.intexsoft.nikita.entity.TaskStatus" />
+        <mapping class="com.intexsoft.nikita.entity.TaskType" />
+        <mapping class="com.intexsoft.nikita.entity.TaskTypeCustomFields" />
+        <mapping class="com.intexsoft.nikita.entity.TaskTypeCustomFieldsValues" />
+        <mapping class="com.intexsoft.nikita.entity.TaskJournal" />
+        <mapping class="com.intexsoft.nikita.entity.User" />
+
+
+    </session-factory>
+</hibernate-configuration>

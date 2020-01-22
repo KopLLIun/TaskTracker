@@ -1,6 +1,6 @@
 package com.intexsoft.nikita.controller.task_controller;
 
-import com.intexsoft.nikita.service.TaskService;
+import com.intexsoft.nikita.service.ITaskService;
 import com.intexsoft.nikita.service.TaskServiceImpl;
 import com.intexsoft.nikita.util.JsonConverter;
 
@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "TaskListJsonServlet", urlPatterns = "/taskListJson")
 public class TaskListJsonServlet extends HttpServlet {
 
-    final TaskService taskService = new TaskServiceImpl();
+    final ITaskService taskService = new TaskServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
