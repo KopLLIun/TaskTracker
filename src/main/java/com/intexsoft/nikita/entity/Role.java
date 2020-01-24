@@ -2,6 +2,7 @@ package com.intexsoft.nikita.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.List;

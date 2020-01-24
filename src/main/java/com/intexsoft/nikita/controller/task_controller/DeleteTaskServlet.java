@@ -18,8 +18,8 @@ public class DeleteTaskServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        Task task = taskService.getTaskById(id);
-        taskService.deleteTask(task);
+        //Task task = taskService.getTaskById(id);
+        taskService.deleteTask(id);
         response.sendRedirect(request.getContextPath() + "/taskList");
     }
 

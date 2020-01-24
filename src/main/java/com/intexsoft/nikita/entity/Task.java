@@ -2,6 +2,7 @@ package com.intexsoft.nikita.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.Date;
 import java.util.Set;
 
 @Data
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @Entity
 @Table(name = "task")
@@ -27,43 +29,25 @@ public class Task {
     @Column(name = "finish_date")
     private Date finishDate;
 
-/*    @JsonProperty("type_id")
-    @Column(name = "type_id")
-    private Long typeId;
-
-    @JsonProperty("request_id")
-    @Column(name = "request_id")
-    private Long requestId;*/
-
-/*    @JsonProperty("assignee_id")
-    @Column(name = "assignee_id")
-    private Long assigneeId;
-
-    @JsonProperty("executor_id")
-    @Column(name = "executor_id")
-    private Long executorId;*/
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "type_id")
     private TaskType type;
 
-    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private Set<TaskJournal> journals;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "assignee_id")
-    private User assigneeId;
-
-
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "executor_id")
-    private User executorId;
+    private User executor;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "assignee_id")
+    private User assignee;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "request_id")
     private Request request;
 
@@ -90,8 +74,8 @@ public class Task {
                 ", description='" + description + '\'' +
                 ", startDate=" + startDate +
                 ", finishDate=" + finishDate + '\n' +
-                ", executorId=" + executorId + '\n' +
-                ", assigneeId=" + assigneeId + '\n' +
+                ", executorId=" + executor.getId() + '\n' +
+                ", assigneeId=" + assignee.getId() + '\n' +
                 ", comments=" + comments + '\n' +
                 ", journals=" + journals + '\n' +
                 ", request=" + request + '\n' +

@@ -1,6 +1,7 @@
 package com.intexsoft.nikita;
 
 import com.intexsoft.nikita.entity.Request;
+import com.intexsoft.nikita.entity.Task;
 import com.intexsoft.nikita.entity.User;
 import com.intexsoft.nikita.service.TaskServiceImpl;
 

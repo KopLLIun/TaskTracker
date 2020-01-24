@@ -30,7 +30,7 @@ public class TaskServiceImpl implements ITaskService {
     }
 
     @Override
-    public void deleteTask(Task task) {
-        taskRepository.deleteTask(task);
+    public void deleteTask(Long id) {
+        taskRepository.deleteTask(id);
     }
 }

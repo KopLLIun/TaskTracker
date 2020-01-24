@@ -23,7 +23,7 @@ public class Comment {
     @JoinColumn(name = "task_id")
     private Task task;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
 

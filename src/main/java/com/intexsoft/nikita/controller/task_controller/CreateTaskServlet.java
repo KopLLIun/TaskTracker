@@ -1,8 +1,10 @@
 package com.intexsoft.nikita.controller.task_controller;
 
+import com.intexsoft.nikita.entity.Request;
 import com.intexsoft.nikita.entity.Task;
-import com.intexsoft.nikita.service.ITaskService;
-import com.intexsoft.nikita.service.TaskServiceImpl;
+import com.intexsoft.nikita.entity.TaskType;
+import com.intexsoft.nikita.entity.User;
+import com.intexsoft.nikita.service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +17,9 @@ public class CreateTaskServlet extends HttpServlet {
     //private static final Logger logger = LoggerFactory.getLogger(CreateTaskServlet.class);
 
     final ITaskService taskService = new TaskServiceImpl();
+    final IUserService userService = new UserServiceImpl();
+    final IRequestService requestService = new RequestServiceImpl();
+    final ITaskTypeService taskTypeService = new TaskTypeServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,11 +46,18 @@ public class CreateTaskServlet extends HttpServlet {
         }*/
         //Long requestId = Long.parseLong(request.getParameter("request_id"));
         //Long assigneeId = Long.parseLong(request.getParameter("assignee_id"));
-        Long executorId = Long.parseLong(request.getParameter("executor_id"));
-//        Task task = new Task(id, description, null, null, (long)1, (long)1, (long)1, executorId);
-        Task task = new Task();
+        User user = userService.getUserById((long)1);
+        Request request1 = requestService.getRequestById((long)1);
+        TaskType taskType = taskTypeService.getTaskTypeById((long)1);
+        Task task = Task.builder().id(id).description(description).
+                assignee(user).
+                executor(user).
+                request(request1).
+                type(taskType).
+                build();
         String errorString = null;
-
+//        User user = User.builder().
+//        task.setAssignee(user);
         taskService.addTask(task);
 
         request.setAttribute("task", task);

@@ -24,11 +24,11 @@ public class TaskJournal {
     @Column(name = "finish_date")
     private Date finishDate;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "task_id")
     private Task task;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "task_status_id")
     private TaskStatus status;
 

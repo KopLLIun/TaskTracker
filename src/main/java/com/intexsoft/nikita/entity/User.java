@@ -1,9 +1,6 @@
 package com.intexsoft.nikita.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -12,10 +9,12 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "user")
+@Builder(toBuilder = true)
 public class User {
 
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
     private Long id;
 
     private String name;
@@ -26,7 +25,7 @@ public class User {
 
     private char[] password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Comment> comments;
 
     @ManyToMany
@@ -35,11 +34,11 @@ public class User {
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @OneToOne(mappedBy = "assigneeId")
-    private Task assigneeTask;
+    @OneToMany(mappedBy = "executor")
+    private Set<Task> executorTask;
 
-    @OneToOne(mappedBy = "executorId", fetch = FetchType.EAGER)
-    private Task executorTask;
+    @OneToMany(mappedBy = "assignee")
+    private Set<Task> assigneeTask;
 
     public User() {
     }

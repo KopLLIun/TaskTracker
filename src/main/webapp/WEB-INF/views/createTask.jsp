@@ -29,10 +29,10 @@
             <td>Description</td>
             <td><input type="text" name="description" value="${task.description}" /></td>
         </tr>
-        <tr>
+<%--        <tr>
             <td>Executor Id</td>
             <td><input type="text" name="executor_id" value="${task.executorId}" /></td>
-        </tr>
+        </tr>--%>
         <tr>
             <td colspan="2">
                 <input type="submit" value="Submit" />

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @AllArgsConstructor
 @Entity
@@ -25,8 +26,8 @@ public class Request {
     @Column(name = "mobile_phone")
     private String mobilePhone;
 
-    @OneToOne(mappedBy = "request", fetch = FetchType.EAGER)
-    private Task task;
+    @OneToMany(mappedBy = "request")
+    private Set<Task> task;
 
     public Request() {}
 
