@@ -18,7 +18,7 @@ public class LogFilter implements Filter {
         String servletPath = req.getServletPath();
 
         System.out.println("#INFO " + new Date() + " - ServletPath :" + servletPath
-                + ", URL =" + req.getRequestURL());
+                + ", URL = " + req.getRequestURL());
         chain.doFilter(request, response);
     }
 

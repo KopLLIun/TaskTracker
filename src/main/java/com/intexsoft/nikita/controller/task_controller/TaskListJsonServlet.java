@@ -3,6 +3,8 @@ package com.intexsoft.nikita.controller.task_controller;
 import com.intexsoft.nikita.service.ITaskService;
 import com.intexsoft.nikita.service.TaskServiceImpl;
 import com.intexsoft.nikita.util.JsonConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import java.io.PrintWriter;
 public class TaskListJsonServlet extends HttpServlet {
 
     final ITaskService taskService = new TaskServiceImpl();
+    private static final Logger logger =  LoggerFactory.getLogger(TaskListServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -31,5 +34,6 @@ public class TaskListJsonServlet extends HttpServlet {
 
         out.write(taskListJson);
         out.flush();
+        logger.info("############### Print list of tasks in JSON format ###############");
     }
 }

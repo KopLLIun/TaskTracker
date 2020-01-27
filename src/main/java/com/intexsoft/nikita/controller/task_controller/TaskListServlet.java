@@ -22,7 +22,7 @@ public class TaskListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        logger.info("############### Just a log message. Without anything ###############");
+        logger.info("############### Print list of tasks ###############");
         /*PrintWriter out = response.getWriter();
 
         out.write(taskService.getTaskById((long)1).toString());

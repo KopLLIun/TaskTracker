@@ -7,12 +7,10 @@ import org.hibernate.SessionFactory;
 
 public class TaskTypeRepositoryImpl implements ITaskTypeRepository {
 
-    private final SessionFactory sessionFactory = HibernateSessionFactory.getSessionFactory();
-
     @Override
     public TaskType getTaskTypeById(Long id) {
 
-        Session session = sessionFactory.openSession();
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
         TaskType taskType = session.get(TaskType.class, id);
         session.close();
         return taskType;

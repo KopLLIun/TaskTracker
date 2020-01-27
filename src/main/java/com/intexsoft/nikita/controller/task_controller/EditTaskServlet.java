@@ -3,6 +3,8 @@ package com.intexsoft.nikita.controller.task_controller;
 import com.intexsoft.nikita.entity.Task;
 import com.intexsoft.nikita.service.ITaskService;
 import com.intexsoft.nikita.service.TaskServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +15,7 @@ import java.io.IOException;
 public class EditTaskServlet extends HttpServlet {
 
     final ITaskService taskService = new TaskServiceImpl();
+    private static final Logger logger =  LoggerFactory.getLogger(TaskListServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,15 +46,15 @@ public class EditTaskServlet extends HttpServlet {
         }
         Long requestId = Long.parseLong(request.getParameter("request_id"));
         Long assigneeId = Long.parseLong(request.getParameter("assignee_id"));*/
-        Long executorId = Long.parseLong(request.getParameter("executor_id"));
 
-//        Task task = new Task(id, description, null, null, (long)1, (long)1, (long)1, executorId);
-        Task task = new Task();
+        Task task = taskService.getTaskById(id);
+        task.setDescription(description);
 
         taskService.updateTask(task);
 
         request.setAttribute("task", task);
         response.sendRedirect(request.getContextPath() + "/taskList");
+        logger.info("############### Task was edited ###############");
     }
 
 

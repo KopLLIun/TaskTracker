@@ -5,6 +5,8 @@ import com.intexsoft.nikita.entity.Task;
 import com.intexsoft.nikita.entity.TaskType;
 import com.intexsoft.nikita.entity.User;
 import com.intexsoft.nikita.service.*;
+import org.apache.juli.logging.org.slf4j.Logger;
+import org.apache.juli.logging.org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +16,7 @@ import java.io.IOException;
 
 public class CreateTaskServlet extends HttpServlet {
 
-    //private static final Logger logger = LoggerFactory.getLogger(CreateTaskServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(CreateTaskServlet.class);
 
     final ITaskService taskService = new TaskServiceImpl();
     final IUserService userService = new UserServiceImpl();
@@ -62,6 +64,6 @@ public class CreateTaskServlet extends HttpServlet {
 
         request.setAttribute("task", task);
         response.sendRedirect(request.getContextPath() + "/taskList");
-
+        logger.info("############### Task was created ###############");
     }
 }

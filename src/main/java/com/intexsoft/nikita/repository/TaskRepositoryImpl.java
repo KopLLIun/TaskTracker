@@ -10,22 +10,19 @@ import java.util.List;
 
 public class TaskRepositoryImpl implements ITaskRepository {
 
-    private static final SessionFactory sessionFactory = HibernateSessionFactory.getSessionFactory();
-
     @Override
     public Task getTaskById(Long id) {
-        SessionFactory sessionFactory = HibernateSessionFactory.getSessionFactory();
-/*        Session session = sessionFactory.openSession();
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
         Task task = (Task) session.get(Task.class, id);
         System.out.println(task);
-        session.close();*/
-        return sessionFactory.openSession().get(Task.class, id);
+        session.close();
+        return task;
     }
 
     @Override
     public List<Task> getTasks() {
 //        sessionFactory.openSession().createQuery("From Task").list().forEach(System.out::println);
-        Session session = sessionFactory.openSession();
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
         List<Task> tasks = session.createQuery("From Task").list();
         session.close();
         return tasks;
@@ -33,7 +30,7 @@ public class TaskRepositoryImpl implements ITaskRepository {
 
     @Override
     public void addTask(Task task) {
-        Session session = sessionFactory.openSession();
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.save(task);
         System.out.println("New task: " + task);
@@ -43,7 +40,7 @@ public class TaskRepositoryImpl implements ITaskRepository {
 
     @Override
     public void updateTask(Task task) {
-        Session session = sessionFactory.openSession();
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         session.update(task);
         System.out.println("Task updated: " + task);
@@ -53,7 +50,7 @@ public class TaskRepositoryImpl implements ITaskRepository {
 
     @Override
     public void deleteTask(Long id) {
-        Session session = sessionFactory.openSession();
+        Session session = HibernateSessionFactory.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Task task = (Task) session.load(Task.class, id);
         session.delete(task);
